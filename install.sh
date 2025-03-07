@@ -13,11 +13,6 @@ echo "Configuring Docker..."
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# کلون کردن پروژه از GitHub
-echo "Cloning repository..."
-git clone https://github.com/hasankhani1/my_marzban.git
-cd my_marzban || { echo "Failed to enter directory"; exit 1; }
-
 # تنظیم و اجرای Backend
 echo "Setting up Backend..."
 cd backend || { echo "Failed to enter backend directory"; exit 1; }
