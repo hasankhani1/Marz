@@ -26,4 +26,4 @@ A complete proxy management system with Xray integration, built with FastAPI (Ba
 ## Installation
 Deploy the entire project with a single command:
 ```bash
-curl -sL https://raw.githubusercontent.com/your-username/my_marzban/master/install.sh | bash
+curl -sL https://raw.githubusercontent.com/hasankhani1/marz/install.sh | bash
