@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./users.db:/app/users.db
+      - ./xray_logs:/var/log/xray
+      - ./xray_configs:/etc/xray
+    depends_on:
+      - xray
+    command: >
+      sh -c "echo 'INSERT OR IGNORE INTO users (username, hashed_password, uuid, role, user_limit) 
+             VALUES (\"superadmin1\", \"\$2b\$12\$KIXz2Qz2Qz2Qz2Qz2Qz2Qu2Qz2Qz2Qz2Qz2Qz2Qz2Qz2Qz2Qz2Q\", \"superadmin-uuid\", \"superadmin\", 50);' | sqlite3 users.db && 
+             uvicorn src.main:app --host 0.0.0.0 --port 8000"
+  xray:
+    image: "xtls/xray-core:latest"
+    volumes:
+      - ./xray_configs:/etc/xray
+      - ./xray_logs:/var/log/xray
+    ports:
+      - "12345:12345"
+      - "54321:54321"
